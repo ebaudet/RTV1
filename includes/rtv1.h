@@ -13,6 +13,9 @@
 #ifndef RTV1_H
 # define RTV1_H
 
+# define WIDTH		640
+# define HEIGHT		480
+
 typedef struct	s_vector
 {
 	double		x;
@@ -22,16 +25,31 @@ typedef struct	s_vector
 
 typedef struct	s_ray
 {
-	t_vector	o;
-	t_vector	d;
+	t_vector	*o;
+	t_vector	*d;
 }				t_ray;
 
 typedef struct	s_sphere
 {
-	t_vector	position;
+	t_vector	*position;
 	double		radius;
 }				t_sphere;
 
+typedef struct	s_img
+{
+	void		*img;
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_img;
+
+typedef struct	s_win
+{
+	void		*mlx;
+	void		*win;
+	t_img		*img;
+}				t_win;
 
 /*
 ** error.c
@@ -48,9 +66,28 @@ void	display_scene();
 /*
 ** vector.c
 */
+t_vector	*vector_new(double x, double y, double z);
 void		vector_normalize(t_vector *v);
 double		vector_dot(t_vector *a, t_vector *b);
 t_vector	*vector_copy(t_vector *a);
 t_vector	*vector_sub(t_vector *a, t_vector *b);
+
+/*
+** sphere.c
+*/
+t_sphere	*sphere_new(double x, double y, double z, double radius);
+int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t);
+
+/*
+** env.c
+*/
+t_win	*env_init(void);
+void	env_del(void);
+
+/*
+** image.c
+*/
+t_img		*img_init(void);
+void		img_del(t_img *img);
 
 #endif /* !RTV1_H */

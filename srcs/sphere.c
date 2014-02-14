@@ -13,7 +13,17 @@
 #include <math.h>
 #include "rtv1.h"
 
-int		intersection_sphere(t_sphere *sphere, t_ray *ray, double *t)
+t_sphere	*sphere_new(double x, double y, double z, double radius)
+{
+	t_sphere	*sphere;
+
+	sphere = (t_sphere *)malloc(sizeof(t_sphere));
+	sphere->position = vector_new(x, y, z);
+	sphere->radius = radius;
+	return (sphere);
+}
+
+int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t)
 {
 	t_vector	*dist;
 	double		b;
