@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:43:10 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:43:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include "libft.h"
 
-
-
+void	*ft_memcpy(void *s1, void const *s2, size_t n)
 {
-	init_scene(scene);
-	display_scene();
-}
+	size_t			i;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	ptr1 = (unsigned char *)s1;
+	ptr2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		// TODO : definir la structure des fichiers scène.
+		ptr1[i] = ptr2[i];
+		i++;
 	}
-}
-
-void	display_scene()
-{
-	
+	return (s1);
 }

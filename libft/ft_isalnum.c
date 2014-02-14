@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:39:49 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/01/04 18:35:41 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include "libft.h"
 
-
-
+int		ft_isalnum(int c)
 {
-	init_scene(scene);
-	display_scene();
-}
-
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		// TODO : definir la structure des fichiers scène.
-	}
-}
-
-void	display_scene()
-{
-	
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+		|| (c >= '0' && c <= '9'))
+		return (1);
+	else
+		return (0);
 }

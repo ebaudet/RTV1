@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:48:03 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/12/04 18:11:20 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include "libft.h"
 
-
-
+void	ft_putstr(char const *s)
 {
-	init_scene(scene);
-	display_scene();
-}
+	int		i;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	if (s)
 	{
-		// TODO : definir la structure des fichiers scène.
+		i = 0;
+		while (s[i] != 0)
+		{
+			ft_putchar(s[i]);
+			i++;
+		}
 	}
-}
-
-void	display_scene()
-{
-	
 }

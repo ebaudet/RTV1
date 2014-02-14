@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:54:29 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/12/04 17:59:53 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include <stdlib.h>
+#include "libft.h"
 
-
-
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	init_scene(scene);
-	display_scene();
-}
+	char		*res;
+	size_t		i;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	if (!s)
+		return (NULL);
+	res = (char *)malloc((len + 1) * sizeof(*res));
+	if (res)
 	{
-		// TODO : definir la structure des fichiers scène.
+		i = 0;
+		while (i < len)
+		{
+			res[i] = s[start + (unsigned int) i];
+			i++;
+		}
+		res[i] = 0;
+		return (res);
 	}
-}
-
-void	display_scene()
-{
-	
+	else
+		return (NULL);
 }

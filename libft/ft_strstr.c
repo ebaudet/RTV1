@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:54:07 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:54:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include "libft.h"
 
-
-
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	init_scene(scene);
-	display_scene();
-}
+	int		i;
+	int		j;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	i = 0;
+	if (!*s2)
+		return ((char *)s1);
+	while (s1[i])
 	{
-		// TODO : definir la structure des fichiers scène.
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] && s2[j])
+			j++;
+		if (!s2[j])
+			return ((char *)&s1[i]);
+		i++;
 	}
-}
-
-void	display_scene()
-{
-	
+	return (NULL);
 }

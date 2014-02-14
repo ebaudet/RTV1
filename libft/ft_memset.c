@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:43:57 by ebaudet           #+#    #+#             */
+/*   Updated: 2013/11/19 16:43:58 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include "libft.h"
 
-
-
+void	*ft_memset(void *b, int c, size_t len)
 {
-	init_scene(scene);
-	display_scene();
-}
+	size_t			i;
+	unsigned char	*ptr;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	ptr = (unsigned char *)b;
+	i = 0;
+	while (i < len)
 	{
-		// TODO : definir la structure des fichiers scène.
+		ptr[i] = c;
+		i++;
 	}
-}
-
-void	display_scene()
-{
-	
+	return (b);
 }

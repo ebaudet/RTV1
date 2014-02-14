@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:51:25 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/01/04 18:44:20 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include <stdlib.h>
+#include "libft.h"
 
-
-
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	init_scene(scene);
-	display_scene();
-}
+	char			*res;
+	unsigned int	i;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	res = (char *)malloc(ft_strlen(s) * sizeof(*res));
+	while (s[i])
 	{
-		// TODO : definir la structure des fichiers scène.
+		res[i] = f(i, s[i]);
+		i++;
 	}
-}
-
-void	display_scene()
-{
-	
+	return (res);
 }

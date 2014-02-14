@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:48 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:48 by ebaudet          ###   ########.fr       */
+/*   Created: 2013/11/19 16:49:47 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/01/04 18:42:35 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "rtv1.h"
+#include <stdlib.h>
+#include "libft.h"
 
-
-
+char	*ft_strdup(const char *s1)
 {
-	init_scene(scene);
-	display_scene();
-}
+	int		i;
+	char	*scopy;
 
-void	init_scene(char *scene)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	if ((fd = open(scene, O_RDONLY)) == -1)
-		ft_error("fichier incorrect");
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		// TODO : definir la structure des fichiers scène.
-	}
-}
-
-void	display_scene()
-{
-	
+	i = -1;
+	scopy = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
+	while (s1[++i])
+		scopy[i] = s1[i];
+	scopy[i] = s1[i];
+	return (scopy);
 }
