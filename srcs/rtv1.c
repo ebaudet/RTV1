@@ -10,12 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <mlx.h>
 #include <math.h>
 #include <fcntl.h>
 #include "rtv1.h"
 
 void	rtv1(char *scene)
 {
+	(void)scene;
 	/*init_scene(scene);*/
 	display_scene();
 }
@@ -36,13 +39,13 @@ void	init_scene(char *scene)
 
 void	display_scene()
 {
-	t_sphere	sphere;
-	t_vector	a;
+	t_sphere	*sphere;
+	t_vector	*a;
 	t_vector	b;
 	int			x;
 	int			y;
-	t_ray		ray_direction;
-	t_ray		rayon;
+	t_vector	ray_dir;
+	t_ray		*rayon;
 	double		coef;
 	int			intersection;
 	t_win		*env;
@@ -50,34 +53,40 @@ void	display_scene()
 
 	env = env_init();
 	img = img_init();
-	sphere = sphere_new(0, 0, 200, 20 * 2);
+	sphere = sphere_new(0, 0, 200, 200 * 2);
 	a = vector_new(0, 0, -1);
 	y = 0;
+	rayon = ray_new();
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			b->x = x - (WIDTH / 2);
-			b->y = y = (HEIGHT / 2);
-			b->x = -(WIDTH / (2 * tan(30 / 2)));
-			vector_normalize(b);
-			ray_direction->x = b->x - a->x;
-			ray_direction->y = b->y - a->y;
-			ray_direction->z = b->z - a->z;
-			vector_normalize(ray_direction);
-			rayon->o->x = a->x;
-			rayon->o->y = a->y;
-			rayon->o->z = a->z;
-			rayon->d->x = ray_direction->x;
-			rayon->d->y = ray_direction->y;
-			rayon->d->z = ray_direction->z;
+			b.x = x - (WIDTH / 2);
+			b.y = y - (HEIGHT / 2);
+			b.z = -(WIDTH / (2 * tan(30 / 2)));
+			vector_normalize(&b);
+			ray_dir.x = b.x - a->x;
+			ray_dir.y = b.y - a->y;
+			ray_dir.z = b.z - a->z;
+			vector_normalize(&ray_dir);
+			vector_set(rayon->o, a->x, a->y, a->z);
+			vector_set(rayon->d, ray_dir.x, ray_dir.y, ray_dir.z);
 			coef = 20000;
 			intersection = intersection_sphere(sphere, rayon, &coef);
 			if (intersection != -1 && coef < 20000)
+			{
 				eb_put_pixel_to_img(img, x, y, 0xFFFFFF);
+				ft_putchar('[');
+				ft_putnbr(x);
+				ft_putchar(',');
+				ft_putnbr(y);
+				ft_putchar(']');
+			}
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(env->mlx, env->win, img->img, 0, 0);
+	pause();
 }

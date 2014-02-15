@@ -13,8 +13,11 @@
 #ifndef RTV1_H
 # define RTV1_H
 
+# include "libft.h"
+
 # define WIDTH		640
 # define HEIGHT		480
+# define KEY_ESC	65307
 
 typedef struct	s_vector
 {
@@ -67,6 +70,8 @@ void	display_scene();
 ** vector.c
 */
 t_vector	*vector_new(double x, double y, double z);
+void		vector_del(t_vector *vector);
+void		vector_set(t_vector *vector, double x, double y, double z);
 void		vector_normalize(t_vector *v);
 double		vector_dot(t_vector *a, t_vector *b);
 t_vector	*vector_copy(t_vector *a);
@@ -76,6 +81,7 @@ t_vector	*vector_sub(t_vector *a, t_vector *b);
 ** sphere.c
 */
 t_sphere	*sphere_new(double x, double y, double z, double radius);
+void		sphere_del(t_sphere *sphere);
 int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t);
 
 /*
@@ -89,5 +95,17 @@ void	env_del(void);
 */
 t_img		*img_init(void);
 void		img_del(t_img *img);
+void		eb_put_pixel_to_img(t_img *img, int x, int y, int color);
+
+/*
+** ray.c
+*/
+t_ray	*ray_new(void);
+void	ray_del(t_ray *rayon);
+
+/*
+** hook.c
+*/
+int		eb_mlx_key_hook(int	keycode);
 
 #endif /* !RTV1_H */

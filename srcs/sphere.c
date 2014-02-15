@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <math.h>
 #include "rtv1.h"
 
@@ -21,6 +22,16 @@ t_sphere	*sphere_new(double x, double y, double z, double radius)
 	sphere->position = vector_new(x, y, z);
 	sphere->radius = radius;
 	return (sphere);
+}
+
+void		sphere_del(t_sphere *sphere)
+{
+	if (sphere)
+	{
+		vector_del(sphere->position);
+		free(sphere);
+		sphere = NULL;
+	}
 }
 
 int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t)

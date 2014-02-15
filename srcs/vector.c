@@ -25,6 +25,22 @@ t_vector	*vector_new(double x, double y, double z)
 	return (v);
 }
 
+void		vector_del(t_vector *vector)
+{
+	if (vector)
+	{
+		free(vector);
+		vector = NULL;
+	}
+}
+
+void		vector_set(t_vector *vector, double x, double y, double z)
+{
+	vector->x = x;
+	vector->y = y;
+	vector->z = z;
+}
+
 void		vector_normalize(t_vector *v)
 {
 	double		id;

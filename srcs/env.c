@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include <stdlib.h>
 #include "rtv1.h"
 
@@ -19,11 +20,11 @@ t_win	*env_init(void)
 
 	if (win == NULL)
 	{
-		if (!(window = (t_win *)malloc(sizeof(t_win))))
+		if (!(win = (t_win *)malloc(sizeof(t_win))))
 			ft_error("erreur malloc");
 		win->mlx = mlx_init();
 		win->win = mlx_new_window(win->mlx, WIDTH, HEIGHT, "RTV1");
-		win->img = init_img();
+		win->img = img_init();
 	}
 	return (win);
 }
@@ -39,5 +40,6 @@ void	env_del(void)
 		free(win->win);
 		img_del(win->img);
 		free(win);
+		win = NULL;
 	}
 }

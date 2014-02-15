@@ -21,8 +21,8 @@ t_img		*img_init(void)
 
 	win = env_init();
 	img = (t_img *)malloc(sizeof(t_img));
-	img->img = mlx_mew_image(win->mlx, WIDTH, HEIGHT);
-	img->data = mlx_get_data_addr(img->img, $img->bpp, &img->size_line, &img->endian);
+	img->img = mlx_new_image(win->mlx, WIDTH, HEIGHT);
+	img->data = mlx_get_data_addr(img->img, &img->bpp, &img->size_line, &img->endian);
 	return (img);
 }
 
@@ -33,6 +33,7 @@ void		img_del(t_img *img)
 		if (img->img != NULL)
 			free(img->img);
 		free(img);
+		img = NULL;
 	}
 }
 
