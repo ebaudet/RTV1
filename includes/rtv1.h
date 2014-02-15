@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-# define WIDTH		640
-# define HEIGHT		480
+# define WIDTH		1000
+# define HEIGHT		1000
 # define KEY_ESC	65307
 
 typedef struct	s_vector
@@ -64,7 +64,8 @@ void	ft_error(char *str);
 */
 void	rtv1(char *scene);
 void	init_scene(char *scene);
-void	display_scene();
+void	eb_mlx();
+void	display_scene(t_img *img);
 
 /*
 ** vector.c
@@ -107,5 +108,6 @@ void	ray_del(t_ray *rayon);
 ** hook.c
 */
 int		eb_mlx_key_hook(int	keycode);
+int		eb_expose_hook(t_img *img);
 
 #endif /* !RTV1_H */

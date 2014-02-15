@@ -21,3 +21,13 @@ int		eb_mlx_key_hook(int	keycode)
 	}
 	return (0);
 }
+
+int		eb_expose_hook(t_img *img)
+{
+	t_win		*env;
+
+	env = env_init();
+	display_scene(img);
+	mlx_put_image_to_window(env->mlx, env->win, img->img, 0, 0);
+	return (0);
+}

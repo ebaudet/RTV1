@@ -20,7 +20,7 @@ void	rtv1(char *scene)
 {
 	(void)scene;
 	/*init_scene(scene);*/
-	display_scene();
+	eb_mlx();
 }
 
 void	init_scene(char *scene)
@@ -37,7 +37,21 @@ void	init_scene(char *scene)
 	}
 }
 
-void	display_scene()
+void	eb_mlx()
+{
+	t_win		*env;
+	t_img		*img;
+
+	env = env_init();
+	img = img_init();
+	mlx_expose_hook(env->win, eb_expose_hook, img);
+	mlx_key_hook(env->win, eb_mlx_key_hook, NULL);
+	mlx_loop(env->mlx);
+}
+
+#include <stdio.h>
+
+void	display_scene(t_img *img)
 {
 	t_sphere	*sphere;
 	t_vector	*a;
@@ -48,13 +62,9 @@ void	display_scene()
 	t_ray		*rayon;
 	double		coef;
 	int			intersection;
-	t_win		*env;
-	t_img		*img;
 
-	env = env_init();
-	img = img_init();
-	sphere = sphere_new(0, 0, 200, 200 * 2);
-	a = vector_new(0, 0, -1);
+	sphere = sphere_new(0, 0, 0, 300);
+	a = vector_new(0, 0, -(WIDTH / (2 * tan(M_PI / 12))));
 	y = 0;
 	rayon = ray_new();
 	while (y < HEIGHT)
@@ -64,29 +74,28 @@ void	display_scene()
 		{
 			b.x = x - (WIDTH / 2);
 			b.y = y - (HEIGHT / 2);
-			b.z = -(WIDTH / (2 * tan(30 / 2)));
-			vector_normalize(&b);
+			b.z = 0;
+			/*vector_normalize(&b);*/
 			ray_dir.x = b.x - a->x;
 			ray_dir.y = b.y - a->y;
 			ray_dir.z = b.z - a->z;
 			vector_normalize(&ray_dir);
 			vector_set(rayon->o, a->x, a->y, a->z);
 			vector_set(rayon->d, ray_dir.x, ray_dir.y, ray_dir.z);
-			coef = 20000;
+			/*printf("norme = %f, ", vector_dot(&ray_dir, &ray_dir));*/
+			coef = 200000;
 			intersection = intersection_sphere(sphere, rayon, &coef);
-			if (intersection != -1 && coef < 20000)
+			if (intersection != -1 && coef < 200000)
 			{
-				eb_put_pixel_to_img(img, x, y, 0xFFFFFF);
-				ft_putchar('[');
+				eb_put_pixel_to_img(img, x, y, 0xFF0000);
+				/*ft_putchar('[');
 				ft_putnbr(x);
 				ft_putchar(',');
 				ft_putnbr(y);
-				ft_putchar(']');
+				ft_putchar(']');*/
 			}
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(env->mlx, env->win, img->img, 0, 0);
-	pause();
 }

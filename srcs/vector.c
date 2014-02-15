@@ -45,7 +45,7 @@ void		vector_normalize(t_vector *v)
 {
 	double		id;
 
-	id = 1 / sqrt((v->x * v->x) + (v->y * v->y) + (v->x * v->z));
+	id = 1 / sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
 	v->x = v->x * id;
 	v->y = v->y * id;
 	v->z = v->z * id;
