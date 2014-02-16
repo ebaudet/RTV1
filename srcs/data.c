@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/14 18:53:45 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/02/14 18:53:45 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/02/16 21:35:11 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/02/16 21:35:11 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include <stdlib.h>
 #include "rtv1.h"
 
-int		main(int ac, char **av)
+t_data	*data_init(void)
 {
-	(void)ac;
-	(void)av;
-	rtv1();
-	return (0);
+	static t_data	*data = NULL;
+
+	if (data == NULL)
+	{
+		if (!(data = (t_data *)malloc(sizeof(t_data))))
+			ft_error("erreur malloc");
+	}
+	return (data);
 }

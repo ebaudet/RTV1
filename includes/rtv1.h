@@ -36,6 +36,7 @@ typedef struct	s_sphere
 {
 	t_vector	*position;
 	double		radius;
+	int			color;
 }				t_sphere;
 
 typedef struct	s_img
@@ -54,18 +55,25 @@ typedef struct	s_win
 	t_img		*img;
 }				t_win;
 
+typedef struct	s_data
+{
+	t_sphere	*sphere;
+	t_vector	*cam;
+}				t_data;
+
 /*
 ** error.c
 */
-void	ft_error(char *str);
+void		ft_error(char *str);
 
 /*
 ** rtv1.c
 */
-void	rtv1(char *scene);
-void	init_scene(char *scene);
-void	eb_mlx();
-void	display_scene(t_img *img);
+void		rtv1(void);
+void		init_scene(void);
+void		display_screen(t_img *img);
+void		color_pixel(t_img *img, int x, int y, t_ray *rayon);
+void		display_scene(t_img *img);
 
 /*
 ** vector.c
@@ -73,9 +81,13 @@ void	display_scene(t_img *img);
 t_vector	*vector_new(double x, double y, double z);
 void		vector_del(t_vector *vector);
 void		vector_set(t_vector *vector, double x, double y, double z);
+t_vector	*vector_copy(t_vector *a);
+
+/*
+** vector_calculation.c
+*/
 void		vector_normalize(t_vector *v);
 double		vector_dot(t_vector *a, t_vector *b);
-t_vector	*vector_copy(t_vector *a);
 t_vector	*vector_sub(t_vector *a, t_vector *b);
 
 /*
@@ -88,8 +100,8 @@ int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t);
 /*
 ** env.c
 */
-t_win	*env_init(void);
-void	env_del(void);
+t_win		*env_init(void);
+void		env_del(void);
 
 /*
 ** image.c
@@ -101,13 +113,19 @@ void		eb_put_pixel_to_img(t_img *img, int x, int y, int color);
 /*
 ** ray.c
 */
-t_ray	*ray_new(void);
-void	ray_del(t_ray *rayon);
+t_ray		*ray_new(void);
+void		ray_del(t_ray *rayon);
 
 /*
 ** hook.c
 */
-int		eb_mlx_key_hook(int	keycode);
-int		eb_expose_hook(t_img *img);
+void		eb_mlx(void);
+int			eb_mlx_key_hook(int keycode);
+int			eb_expose_hook(t_img *img);
+
+/*
+** data.c
+*/
+t_data		*data_init(void);
 
 #endif /* !RTV1_H */

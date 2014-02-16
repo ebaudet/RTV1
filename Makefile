@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 NAME	= RTV1
-FILES	= env.c error.c image.c main.c rtv1.c sphere.c vector.c ray.c hook.c
+FILES	= env.c error.c image.c main.c rtv1.c sphere.c vector.c ray.c hook.c \
+		data.c vector_calculation.c
 SRCS	= $(addprefix srcs/, $(FILES))
 OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= -I includes -I libft/includes

@@ -13,7 +13,19 @@
 #include <mlx.h>
 #include "rtv1.h"
 
-int		eb_mlx_key_hook(int	keycode)
+void	eb_mlx(void)
+{
+	t_win		*env;
+	t_img		*img;
+
+	env = env_init();
+	img = img_init();
+	mlx_expose_hook(env->win, eb_expose_hook, img);
+	mlx_key_hook(env->win, eb_mlx_key_hook, NULL);
+	mlx_loop(env->mlx);
+}
+
+int		eb_mlx_key_hook(int keycode)
 {
 	if (keycode == KEY_ESC)
 	{

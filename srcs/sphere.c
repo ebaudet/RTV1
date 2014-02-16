@@ -21,6 +21,7 @@ t_sphere	*sphere_new(double x, double y, double z, double radius)
 	sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	sphere->position = vector_new(x, y, z);
 	sphere->radius = radius;
+	sphere->color = 0x000000;
 	return (sphere);
 }
 
@@ -34,8 +35,6 @@ void		sphere_del(t_sphere *sphere)
 	}
 }
 
-#include <stdio.h>
-
 int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t)
 {
 	t_vector	*dist;
@@ -44,19 +43,13 @@ int			intersection_sphere(t_sphere *sphere, t_ray *ray, double *t)
 	double		t0;
 	double		t1;
 
-	/*printf("sphere : %f %f %f, ", sphere->position->x, sphere->position->y , sphere->position->z);
-	printf("ray->o : %f %f %f, ", ray->o->x, ray->o->y , ray->o->z);*/
 	dist = vector_copy(sphere->position);
 	dist = vector_sub(dist, ray->o);
 	b = 2 * vector_dot(ray->d, dist);
-/*	delta = (b * b) - 4 * vector_dot(dist, dist) + pow(sphere->radius, 2);*/
 	delta = vector_dot(dist, dist) - pow(sphere->radius, 2);
 	delta = pow(b, 2) - 4 * delta;
 	if (delta < 0)
-	{
-		/*printf("delta : %f\n", delta);*/
 		return (-1);
-	}
 	t0 = (b - sqrt(delta)) / (2);
 	t1 = (b + sqrt(delta)) / (2);
 	if ((t0 > 0.1) && (t0 < *t))
